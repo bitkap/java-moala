@@ -45,8 +45,8 @@ System.out.println(transactionView);
 
 ## KYC verification
 ```
-$kyc = $client->kyc($phoneNumber, $serviceCode);
-print_r($kyc);
+KycView kycView = moalaClient.getKycNumber("675598817","PAIEMENTMARCHAND_MTN_CM");
+System.out.println(kycView);
 ```
 
 ## Make a cashin
