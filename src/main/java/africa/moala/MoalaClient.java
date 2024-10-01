@@ -5,6 +5,7 @@ import africa.moala.models.TransactionView;
 import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.commons.codec.digest.HmacUtils;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Data
+@NoArgsConstructor
 public class MoalaClient {
 
   private String appKey;
