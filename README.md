@@ -9,9 +9,13 @@ The Moala SDK for JAVA enables developers to easily integrate Moala API function
 
 ## Installation
 
-You can install the SDK via MAVEN. Add the SDK to your project using the following command:
+You can install the SDK via MAVEN. Add the SDK to your project using the following command: mvn package
 
-
+        <dependency>
+            <groupId>africa.moala</groupId>
+            <artifactId>sdkmoala</artifactId>
+            <version>1.0</version>
+        </dependency>
 
 ## Configuration
 To use the SDK, you need an API key and a secret key supplied by Moala. Here's how to configure and initialize the SDK:
