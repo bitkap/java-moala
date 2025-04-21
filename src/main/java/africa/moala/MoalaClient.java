@@ -123,7 +123,40 @@ public class MoalaClient {
     TransactionView res = restTemplate.exchange(urlApi+"/v1/api/transaction/payment", HttpMethod.POST, entity, TransactionView.class).getBody();
 
     return  res;
-  }  public TransactionView cashin ( String phoneNumber, String serviceCode, double amount, String partnerId){
+  }
+  public TransactionView cashout ( String phoneNumber, String serviceCode, double amount, String partnerId , String otp){
+
+
+    Map resq = new HashMap<>();
+
+    resq.put("amount", amount);
+    resq.put("transactionType", "deposit");
+    resq.put("serviceCode", serviceCode);
+    resq.put("phoneNumber", phoneNumber);
+    resq.put("partnerId", partnerId);
+    resq.put("otp", otp);
+
+    String bodyJson = new Gson().toJson(resq);
+
+    Long epoch = Instant.now().getEpochSecond();
+    String message = epoch+"POST"+"/v1/api/transaction/payment"+bodyJson ;
+
+
+    String signatureSyn = HmacUtils.hmacSha256Hex(secretKey, message);
+
+    final HttpHeaders headers = new HttpHeaders();
+    headers.set("LP-ACCESS-SIGN", signatureSyn);
+    headers.set("Content-Type", "application/json");
+    headers.set("LP-ACCESS-TIMESTAMP", ""+epoch);
+    headers.set("LP-ACCESS-KEY", appKey);
+    final HttpEntity<String> entity = new HttpEntity<String>(bodyJson,headers);
+
+    TransactionView res = restTemplate.exchange(urlApi+"/v1/api/transaction/payment", HttpMethod.POST, entity, TransactionView.class).getBody();
+
+    return  res;
+  }
+
+  public TransactionView cashin ( String phoneNumber, String serviceCode, double amount, String partnerId){
 
 
     Map resq = new HashMap<>();
